@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jingles Chantés Professionnels pour Radio & Entreprise | Jingletube</title>
+    <meta name="description" content="Création et vente de jingles chantés sur mesure de haute qualité pour les stations de radio. Habillage antenne, voix off et identité sonore." />
+    
+    <!-- Tailwind CSS (Via CDN pour simplifier le build sans configuration PostCSS complexe) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Configuration Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Open Sans', 'sans-serif'],
+              display: ['Montserrat', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                dark: '#172554', // Deep Navy Blue (from 'Jingle')
+                primary: '#06b6d4', // Cyan/Turquoise (from '.com' and gradient)
+                accent: '#f97316', // Orange (from 'Tube')
+                accentHover: '#ea580c',
+                secondary: '#3b82f6', // Intermediate blue for gradients
+              }
+            },
+            animation: {
+              'bounce-subtle': 'bounce-subtle 3s infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            },
+            keyframes: {
+              'bounce-subtle': {
+                '0%, 100%': { transform: 'translateY(-5%)' },
+                '50%': { transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #f8fafc;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.0",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <!-- Point d'entrée pour le build Vite -->
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
