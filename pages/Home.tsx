@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       features: [
         '10 Jingles Chantés',
         'Livraison HD (WAV/MP3)',
-        'Droits de diffusion inclus',
+        'Droits de diffusion locale inclus',
         'Mixage & Mastering Pro'
       ]
     },
@@ -26,9 +26,9 @@ const Home: React.FC = () => {
       features: [
         '20 Jingles Chantés',
         'Livraison HD (WAV/MP3)',
-        'Droits de diffusion inclus',
+        'Droits de diffusion régionale inclus',
         'Mixage & Mastering Pro',
-        '1 Voix Off Promo offerte'
+        'Rédaction offerte'
       ],
       isPopular: true
     },
@@ -40,10 +40,10 @@ const Home: React.FC = () => {
       features: [
         '40 Jingles Chantés',
         'Livraison HD (WAV/MP3)',
-        'Droits de diffusion inclus',
+        'Droits de diffusion nationale inclus',
         'Mixage & Mastering Pro',
-        '3 Voix Off Promo offertes',
-        'Accès prioritaire studio'
+        'Rédaction offerte',
+        'Création prioritaire'
       ]
     }
   ];
@@ -65,11 +65,11 @@ const Home: React.FC = () => {
             Leader du Jingle Radio
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
-            Vos jingles chantés <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-400">seront des tubes.</span>
+            Vos jingles chantés : <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-400">le son des tubes.</span>
           </h1>
           <p className="text-lg md:text-xl text-blue-100 max-w-2xl mb-10 leading-relaxed font-light">
-            Boostez l'identité sonore de votre station avec des <strong>jingles chantés sur mesure</strong> de qualité studio. L'habillage antenne qui marque les esprits.
+            Boostez l'identité sonore de votre station avec des <strong>jingles chantés sur mesure</strong> qui sonnent comme des hits. L'habillage antenne qui marque les esprits.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             <Button size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-10 rounded-full blur-2xl transform translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-700"></div>
                  
                  <div className="relative z-10">
-                   <h3 className="font-display font-bold text-4xl text-white mb-2">+500</h3>
+                   <h3 className="font-display font-bold text-4xl text-white mb-2">+200</h3>
                    <p className="text-brand-primary font-medium tracking-wide uppercase text-sm">Radios satisfaites en Europe</p>
                  </div>
                </div>
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             <span className="text-brand-primary font-bold tracking-wider uppercase text-sm mb-2 block">Nos Tarifs</span>
             <h2 className="text-3xl md:text-5xl font-display font-bold text-brand-dark mb-6">Des packs pour tous les budgets</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Solutions clés en main, du web-radio locale au réseau national.
+              Solutions clés en main, de la radio locale au réseau national.
             </p>
           </div>
 
@@ -238,7 +238,7 @@ const Home: React.FC = () => {
             </p>
             <Link to="/contact">
               <Button variant="white" size="lg" className="font-bold text-brand-dark hover:bg-brand-primary hover:text-white border-0">
-                Réclamer ma remise
+                Demander ma remise
               </Button>
             </Link>
           </div>
