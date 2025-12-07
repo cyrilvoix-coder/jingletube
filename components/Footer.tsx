@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Mic2 } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  // Mini Logo for Footer
-  const FooterLogo = () => (
-    <div className="w-8 h-8 relative inline-block">
-       <svg viewBox="0 0 100 100" className="w-full h-full">
+  // Logo identique à celui de la navbar
+  const Logo = () => (
+    <div className="w-10 h-10 relative inline-block">
+      <svg viewBox="0 0 100 100" className="w-full h-full">
         <defs>
-          <linearGradient id="gradBlueFooter" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="gradBlue" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style={{ stopColor: '#06b6d4', stopOpacity: 1 }} />
             <stop offset="100%" style={{ stopColor: '#ffffff', stopOpacity: 0.8 }} />
           </linearGradient>
-           <linearGradient id="gradOrangeFooter" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="gradOrange" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style={{ stopColor: '#fbbf24', stopOpacity: 1 }} />
             <stop offset="100%" style={{ stopColor: '#ea580c', stopOpacity: 1 }} />
           </linearGradient>
         </defs>
-        <path d="M 30 20 L 50 20 L 50 70 Q 50 85 35 85 L 25 85" stroke="url(#gradBlueFooter)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 50 20 L 80 20" stroke="url(#gradOrangeFooter)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 65 20 L 65 80" stroke="url(#gradOrangeFooter)" strokeWidth="12" fill="none" strokeLinecap="round" />
+        <path d="M 30 20 L 50 20 L 50 70 Q 50 85 35 85 L 25 85" stroke="url(#gradBlue)" strokeWidth="12" fill="none" strokeLinecap="round" />
+        <path d="M 50 20 L 80 20" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
+        <path d="M 65 20 L 65 80" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
       </svg>
     </div>
   );
@@ -31,14 +31,13 @@ const Footer: React.FC = () => {
           
           {/* Brand Column */}
           <div className="space-y-4">
-             <div className="flex items-center gap-2 mb-4">
-                <FooterLogo />
-                <span className="font-display font-extrabold text-2xl tracking-tight">
-                  <span className="text-white">Jingle</span>
-                  <span className="text-brand-accent">Tube</span>
-                  <span className="text-brand-primary">.com</span>
-                </span>
-              </div>
+            <div className="flex items-center gap-2 mb-4">
+              <Logo />
+              <span className="font-display font-extrabold text-xl tracking-tight">
+                <span className="text-white">Jingle</span>
+                <span className="text-brand-accent">Tube</span>
+              </span>
+            </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Le spécialiste de l'identité sonore radio. Jingles chantés sur mesure pour booster votre audience.
             </p>
