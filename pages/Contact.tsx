@@ -110,8 +110,8 @@ const Contact: React.FC = () => {
                    <div>
                       <h3 className="font-bold text-gray-900 text-lg">Studio</h3>
                       <p className="text-gray-500">
-                        12 Avenue de la Radio<br/>
-                        75000 Paris, France
+                        Zone nord<br/>
+                        87000 Limoges, France
                       </p>
                    </div>
                 </div>
