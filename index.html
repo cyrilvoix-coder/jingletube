@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jingles Chantés Professionnels pour Radio & Entreprise | Jingletube</title>
     <meta name="description" content="Création et vente de jingles chantés sur mesure de haute qualité pour les stations de radio. Habillage antenne, voix off et identité sonore." />
-    
+    <link rel="icon" type="image/png" href="/logo.png" />
     <!-- Tailwind CSS (Via CDN pour simplifier le build sans configuration PostCSS complexe) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -76,6 +76,19 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <form 
+    name="contact" 
+    data-netlify="true" 
+    netlify-honeypot="bot-field" 
+    hidden
+>
+    <input type="text" name="name" />
+    <input type="text" name="radio" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <textarea name="message"></textarea>
+    <input name="bot-field" />
+</form>
     <div id="root"></div>
     <!-- Point d'entrée pour le build Vite -->
     <script type="module" src="./index.tsx"></script>
