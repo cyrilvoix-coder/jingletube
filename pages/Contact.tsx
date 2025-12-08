@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
     phone: '',
     message: ''
   });
-  const [botField, setBotField] = useState(''); // honeypot
+  const [botField, setBotField] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,7 +29,6 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // honeypot check
     if (botField) return;
 
     const payload = {
@@ -44,7 +43,6 @@ const Contact: React.FC = () => {
         body: encode(payload)
       });
       setIsSubmitted(true);
-      // reset
       setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ name: '', radio: '', email: '', phone: '', message: '' });
@@ -56,6 +54,21 @@ const Contact: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      
+      <form 
+          name="contact" 
+          data-netlify="true" 
+          netlify-honeypot="bot-field" 
+          hidden
+      >
+          <input type="text" name="name" />
+          <input type="text" name="radio" />
+          <input type="email" name="email" />
+          <input type="tel" name="phone" />
+          <textarea name="message"></textarea>
+          <input name="bot-field" />
+      </form>
+
       {/* Header */}
       <div className="bg-brand-dark py-16 text-center px-4">
         <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
@@ -72,17 +85,17 @@ const Contact: React.FC = () => {
           <div>
              <h2 className="text-2xl font-display font-bold text-brand-dark mb-6">Informations</h2>
              <div className="bg-slate-50 rounded-2xl p-8 space-y-8 border border-gray-100">
-                <div className="flex items-start gap-4">
-                   <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-brand-primary flex-shrink-0">
+               <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-brand-primary flex-shrink-0">
                       <Phone className="w-6 h-6" />
-                   </div>
-                   <div>
-                      <h3 className="font-bold text-gray-900 text-lg">Par Téléphone</h3>
-                      <p className="text-gray-500 mb-1">Du lundi au vendredi, 9h-18h</p>
-                      <a href="tel:0525323232" className="text-xl font-bold text-brand-accent hover:text-brand-accentHover">
-                        05 25 32 32 32
-                      </a>
-                   </div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">Par Téléphone</h3>
+                    <p className="text-gray-500 mb-1">Du lundi au vendredi, 9h-18h</p>
+                    <a href="tel:0525323232" className="text-xl font-bold text-brand-accent hover:text-brand-accentHover">
+                      05 25 32 32 32
+                    </a>
+                  </div>
                 </div>
 
                 <div className="flex items-start gap-4">
@@ -110,126 +123,123 @@ const Contact: React.FC = () => {
                       </p>
                    </div>
                 </div>
-             </div>
-             
-             {/* Audio Network Badge */}
-             <div className="mt-8 p-6 bg-blue-900 rounded-2xl text-white text-center relative overflow-hidden group">
+              </div>
+              
+              {/* Audio Network Badge */}
+              <div className="mt-8 p-6 bg-blue-900 rounded-2xl text-white text-center relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary opacity-10 rounded-full blur-2xl group-hover:opacity-20 transition-opacity"></div>
                 <h3 className="font-bold text-xl mb-2">Partenaire Audio Network ?</h3>
                 <p className="text-blue-100 text-sm mb-4">N'oubliez pas de mentionner votre code partenaire dans le message pour bénéficier de vos -20% !</p>
-             </div>
-          </div>
+              </div>
+            </div>
 
-          {/* Form */}
-          <div>
-            <h2 className="text-2xl font-display font-bold text-brand-dark mb-6">Envoyez-nous un message</h2>
-            
-            {isSubmitted ? (
-               <div className="bg-green-50 border border-green-200 rounded-2xl p-12 text-center animate-fade-in">
+            {/* Form */}
+            <div>
+              <h2 className="text-2xl font-display font-bold text-brand-dark mb-6">Envoyez-nous un message</h2>
+              
+              {isSubmitted ? (
+                <div className="bg-green-50 border border-green-200 rounded-2xl p-12 text-center animate-fade-in">
                   <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10" />
                   </div>
                   <h3 className="text-2xl font-bold text-green-800 mb-2">Message Envoyé !</h3>
                   <p className="text-green-700">Merci de nous avoir contactés. Nous reviendrons vers vous très rapidement.</p>
-               </div>
-            ) : (
-              // Netlify form attributes: name + data-netlify + honeypot
-              <form
-                name="contact"
-                method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
-                onSubmit={handleSubmit}
-                className="space-y-6 bg-white shadow-lg shadow-slate-100 rounded-2xl p-8 border border-gray-100"
-              >
-                {/* Required for Netlify when using JS submission */}
-                <input type="hidden" name="form-name" value="contact" />
-                {/* Honeypot field (hidden from users) */}
-                <p className="hidden">
-                  <label>Ne pas remplir<input name="bot-field" value={botField} onChange={e => setBotField(e.target.value)} /></label>
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
-                      placeholder="Votre nom"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="radio" className="block text-sm font-medium text-gray-700 mb-2">Nom de la Radio</label>
-                    <input
-                      type="text"
-                      id="radio"
-                      name="radio"
-                      required
-                      value={formData.radio}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
-                      placeholder="Nom de votre station"
-                    />
-                  </div>
                 </div>
+              ) : (
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-6 bg-white shadow-lg shadow-slate-100 rounded-2xl p-8 border border-gray-100"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden">
+                    <label>Ne pas remplir<input name="bot-field" value={botField} onChange={e => setBotField(e.target.value)} /></label>
+                  </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
+                        placeholder="Votre nom"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="radio" className="block text-sm font-medium text-gray-700 mb-2">Nom de la Radio</label>
+                      <input
+                        type="text"
+                        id="radio"
+                        name="radio"
+                        required
+                        value={formData.radio}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
+                        placeholder="Nom de votre station"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email professionnel</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
+                        placeholder="email@radio.com"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
+                        placeholder="Votre numéro"
+                      />
+                    </div>
+                  </div>
+
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email professionnel</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Votre message</label>
+                    <textarea
+                      id="message"
+                      name="message"
                       required
-                      value={formData.email}
+                      rows={5}
+                      value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
-                      placeholder="email@radio.com"
-                    />
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all resize-none"
+                      placeholder="Dites-nous en plus sur votre projet (Pack souhaité, style musical, délais...)"
+                    ></textarea>
                   </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all"
-                      placeholder="Votre numéro"
-                    />
-                  </div>
-                </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Votre message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary outline-none transition-all resize-none"
-                    placeholder="Dites-nous en plus sur votre projet (Pack souhaité, style musical, délais...)"
-                  ></textarea>
-                </div>
-
-                <Button type="submit" fullWidth size="lg" className="flex items-center gap-2">
-                   Envoyer le message <Send className="w-4 h-4" />
-                </Button>
-              </form>
-            )}
+                  <Button type="submit" fullWidth size="lg" className="flex items-center gap-2">
+                      Envoyer le message <Send className="w-4 h-4" />
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default Contact;
