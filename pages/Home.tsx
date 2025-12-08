@@ -69,7 +69,7 @@ const Home: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-yellow-400">le son des tubes.</span>
           </h1>
           <p className="text-lg md:text-xl text-blue-100 max-w-2xl mb-10 leading-relaxed font-light">
-            Boostez l'identité sonore de votre station avec des <strong>jingles chantés sur mesure</strong> qui sonnent comme des hits. L'habillage antenne qui marque les esprits.
+            Boostez l'identité sonore de votre station avec nos <strong>jingles chantés sur mesure</strong>. L'habillage antenne qui marque les esprits.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
             <Button size="lg" onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -249,7 +249,7 @@ const Home: React.FC = () => {
       <section className="py-24 bg-white">
          <div className="max-w-5xl mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-5xl font-display font-bold text-brand-dark mb-10">
-              Prêt à transformer votre antenne ?
+              Prêt à transformer votre radio ?
             </h2>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <Link to="/contact">
