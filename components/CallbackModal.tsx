@@ -70,7 +70,7 @@ const CallbackModal: React.FC = () => {
                     <Send className="w-8 h-8" />
                   </div>
                   <h4 className="text-xl font-bold text-gray-800 mb-2">Demande envoyée !</h4>
-                  <p className="text-gray-600">Un spécialiste Jingletube vous rappellera très rapidement.</p>
+                  <p className="text-gray-600">Un conseillé Jingletube vous rappellera très rapidement.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
