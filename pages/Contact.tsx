@@ -11,6 +11,7 @@ const Contact: React.FC = () => {
     phone: '',
     message: ''
   });
+  const [botField, setBotField] = useState(''); // honeypot
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -20,41 +21,37 @@ const Contact: React.FC = () => {
     });
   };
 
+  const encode = (data: Record<string, string>) =>
+    Object.keys(data)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // NOTE POUR LE DÉPLOIEMENT STATIQUE :
-    // Puisque le site est statique (sans serveur Node.js), vous devez utiliser un service externe pour recevoir les emails.
-    // Exemple populaire : Formspree, EmailJS, ou Netlify Forms.
-    //
-    // Exemple avec Formspree :
-    // 1. Créez un compte sur formspree.io
-    // 2. Remplacez l'URL ci-dessous par votre endpoint Formspree
-    
-    /*
-    try {
-        const response = await fetch("https://formspree.io/f/VOTRE_ID_FORMSPREE", {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        if (response.ok) {
-            setIsSubmitted(true);
-        }
-    } catch (error) {
-        console.error("Erreur d'envoi", error);
-    }
-    */
 
-    // Simulation pour la démo
-    console.log("Formulaire envoyé :", formData);
-    setIsSubmitted(true);
-    
-    // Reset after 5 seconds roughly
-    setTimeout(() => {
+    // honeypot check
+    if (botField) return;
+
+    const payload = {
+      'form-name': 'contact',
+      ...formData
+    };
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(payload)
+      });
+      setIsSubmitted(true);
+      // reset
+      setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ name: '', radio: '', email: '', phone: '', message: '' });
-    }, 5000);
+      }, 5000);
+    } catch (error) {
+      console.error('Erreur d\'envoi', error);
+    }
   };
 
   return (
@@ -71,12 +68,10 @@ const Contact: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          
           {/* Contact Information */}
           <div>
              <h2 className="text-2xl font-display font-bold text-brand-dark mb-6">Informations</h2>
              <div className="bg-slate-50 rounded-2xl p-8 space-y-8 border border-gray-100">
-                
                 <div className="flex items-start gap-4">
                    <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-brand-primary flex-shrink-0">
                       <Phone className="w-6 h-6" />
@@ -138,7 +133,22 @@ const Contact: React.FC = () => {
                   <p className="text-green-700">Merci de nous avoir contactés. Nous reviendrons vers vous très rapidement.</p>
                </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-lg shadow-slate-100 rounded-2xl p-8 border border-gray-100">
+              // Netlify form attributes: name + data-netlify + honeypot
+              <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="space-y-6 bg-white shadow-lg shadow-slate-100 rounded-2xl p-8 border border-gray-100"
+              >
+                {/* Required for Netlify when using JS submission */}
+                <input type="hidden" name="form-name" value="contact" />
+                {/* Honeypot field (hidden from users) */}
+                <p className="hidden">
+                  <label>Ne pas remplir<input name="bot-field" value={botField} onChange={e => setBotField(e.target.value)} /></label>
+                </p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Nom complet</label>
