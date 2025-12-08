@@ -1,26 +1,18 @@
+// ...existing code...
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Mic2 } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  // Logo identique à celui de la navbar
+  // Logo identique à celui de la navbar (utilise logo_jt_stext avec fallback PNG)
   const Logo = () => (
     <div className="w-10 h-10 relative inline-block">
-      <svg viewBox="0 0 100 100" className="w-full h-full">
-        <defs>
-          <linearGradient id="gradBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#06b6d4', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#ffffff', stopOpacity: 0.8 }} />
-          </linearGradient>
-          <linearGradient id="gradOrange" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#fbbf24', stopOpacity: 1 }} />
-            <stop offset="100%" style={{ stopColor: '#ea580c', stopOpacity: 1 }} />
-          </linearGradient>
-        </defs>
-        <path d="M 30 20 L 50 20 L 50 70 Q 50 85 35 85 L 25 85" stroke="url(#gradBlue)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 50 20 L 80 20" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
-        <path d="M 65 20 L 65 80" stroke="url(#gradOrange)" strokeWidth="12" fill="none" strokeLinecap="round" />
-      </svg>
+      <img
+        src="/logo_jt_stext.svg"
+        alt="Jingletube"
+        className="w-full h-full object-contain"
+        onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/logo_jt_stext.png'; }}
+      />
     </div>
   );
 
@@ -100,3 +92,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+// ...existing code...
