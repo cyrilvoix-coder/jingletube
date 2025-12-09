@@ -10,14 +10,14 @@ const Demos: React.FC = () => {
   const currentAudioInstance = useRef<HTMLAudioElement | null>(null);
 
   const demos: (DemoTrack & { src: string })[] = [
-    { id: '1', title: 'Morning Show Dynamique', category: 'CHR / Top 40', duration: '0:15', src: '/audio/demo-1.mp3' },
-    { id: '2', title: 'Top Horaire Information', category: 'News / Talk', duration: '0:20', src: '/audio/demo-2.mp3' },
-    { id: '3', title: 'Feel Good Afternoon', category: 'Adult Contemporary', duration: '0:12', src: '/audio/demo-3.mp3' },
-    { id: '4', title: 'Night Session Intro', category: 'Electro / Dance', duration: '0:30', src: '/audio/demo-4.mp3' },
-    { id: '5', title: 'Flash Météo Bed', category: 'Service', duration: '0:45', src: '/audio/demo-5.mp3' },
-    { id: '6', title: 'Week-end Special', category: 'Gold / Oldies', duration: '0:18', src: '/audio/demo-6.mp3' },
-    { id: '7', title: 'Summer Hits Jingle', category: 'CHR / Top 40', duration: '0:10', src: '/audio/demo-7.mp3' },
-    { id: '8', title: 'Morning Coffee Soft', category: 'Jazz / Lounge', duration: '0:25', src: '/audio/demo-8.mp3' },
+    { id: '1', title: 'Dance Floor Dynamique', category: 'Hit / Top 40', duration: '0:55', src: '/audio/demo-1.mp3' },
+    { id: '2', title: 'Pop Rock Energique', category: 'Mid High / Top 50', duration: '0:49', src: '/audio/demo-2.mp3' },
+    { id: '3', title: 'Cool summer', category: 'Cool Contemporain', duration: '1:13', src: '/audio/demo-3.mp3' },
+    { id: '4', title: 'Latino Electro Pop', category: 'Electro / Hit', duration: '0:44', src: '/audio/demo-4.mp3' },
+    { id: '5', title: 'Rock N Roll', category: 'Energique', duration: '0:35', src: '/audio/demo-5.mp3' },
+    { id: '6', title: 'Week-end Smile', category: 'Tube / Top 30', duration: '1:12', src: '/audio/demo-6.mp3' },
+    { id: '7', title: 'Summer Hits Jingle', category: 'CHR / Top 40', duration: '1:10', src: '/audio/demo-7.mp3' },
+    { id: '8', title: 'House Big Beat', category: 'High Tempo / Dance Foor', duration: '1:16', src: '/audio/demo-8.mp3' },
   ];
 
   useEffect(() => {
