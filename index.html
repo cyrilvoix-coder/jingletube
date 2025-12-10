@@ -6,7 +6,7 @@
     <title>Jingles Chantés Professionnels pour Radio & Entreprise | Jingletube</title>
     <meta name="description" content="Création et vente de jingles chantés sur mesure de haute qualité pour les stations de radio. Habillage antenne, voix off et identité sonore." />
     <link rel="icon" type="image/png" href="/logo.png" />
-    <!-- Tailwind CSS (Via CDN pour simplifier le build sans configuration PostCSS complexe) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -76,22 +76,41 @@
 <link rel="stylesheet" href="/index.css">
 </head>
   <body>
+    <!-- 
+      FORMULAIRES CACHÉS POUR NETLIFY FORMS 
+      Indispensable pour que les robots Netlify détectent les champs lors du déploiement.
+    -->
+
+    <!-- Formulaire 1 : Page Contact -->
     <form 
-    name="contact" 
-    data-netlify="true" 
-    netlify-honeypot="bot-field" 
-    hidden
->
-    <input type="text" name="name" />
-    <input type="text" name="radio" />
-    <input type="email" name="email" />
-    <input type="tel" name="phone" />
-    <textarea name="message"></textarea>
-    <input name="bot-field" />
-</form>
+      name="contact" 
+      data-netlify="true" 
+      netlify-honeypot="bot-field" 
+      hidden
+    >
+      <input type="text" name="name" />
+      <input type="text" name="radio" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+      <input name="bot-field" />
+    </form>
+
+    <!-- Formulaire 2 : Modal de Rappel (Callback) -->
+    <form 
+      name="callback-request" 
+      data-netlify="true" 
+      netlify-honeypot="bot-field" 
+      hidden
+    >
+      <input type="text" name="radioName" />
+      <input type="text" name="contactName" />
+      <input type="text" name="phoneNumber" />
+      <input name="bot-field" />
+    </form>
+
     <div id="root"></div>
     <!-- Point d'entrée pour le build Vite -->
     <script type="module" src="./index.tsx"></script>
-  <script type="module" src="/index.tsx"></script>
-</body>
+  </body>
 </html>
