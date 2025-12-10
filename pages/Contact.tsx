@@ -49,25 +49,17 @@ const Contact: React.FC = () => {
       }, 5000);
     } catch (error) {
       console.error('Erreur d\'envoi', error);
+      alert("Une erreur est survenue lors de l'envoi.");
     }
   };
 
   return (
     <div className="min-h-screen bg-white">
       
-      <form 
-          name="contact" 
-          data-netlify="true" 
-          netlify-honeypot="bot-field" 
-          hidden
-      >
-          <input type="text" name="name" />
-          <input type="text" name="radio" />
-          <input type="email" name="email" />
-          <input type="tel" name="phone" />
-          <textarea name="message"></textarea>
-          <input name="bot-field" />
-      </form>
+      {/* 
+          NOTE : Le formulaire caché <form hidden> a été retiré d'ici car il est déjà présent dans index.html.
+          C'est la méthode recommandée par Netlify pour éviter les conflits.
+      */}
 
       {/* Header */}
       <div className="bg-brand-dark py-16 text-center px-4">
@@ -144,6 +136,12 @@ const Contact: React.FC = () => {
                   </div>
                   <h3 className="text-2xl font-bold text-green-800 mb-2">Message Envoyé !</h3>
                   <p className="text-green-700">Merci de nous avoir contactés. Nous reviendrons vers vous très rapidement.</p>
+                  <button 
+                    onClick={() => setIsSubmitted(false)}
+                    className="mt-6 text-brand-primary hover:underline text-sm font-bold"
+                  >
+                    Envoyer un autre message
+                  </button>
                 </div>
               ) : (
                 <form
