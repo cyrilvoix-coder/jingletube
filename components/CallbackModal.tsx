@@ -3,6 +3,13 @@ import { Phone, X, Send } from 'lucide-react';
 import Button from './Button';
 import { CallbackFormData } from '../types';
 
+// Fonction utilitaire pour encoder les données pour Netlify
+const encode = (data: any) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 const CallbackModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -11,6 +18,8 @@ const CallbackModal: React.FC = () => {
     contactName: '',
     phoneNumber: ''
   });
+  // Ajout du champ anti-spam
+  const [botField, setBotField] = useState('');
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -23,14 +32,32 @@ const CallbackModal: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate API call
-    console.log("Callback requested:", formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsOpen(false);
-      setIsSubmitted(false);
-      setFormData({ radioName: '', contactName: '', phoneNumber: '' });
-    }, 3000);
+    
+    // Si le robot remplit ce champ, on n'envoie pas
+    if (botField) return;
+
+    // Envoi des données à Netlify via fetch
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ 
+        "form-name": "callback-request", // Doit correspondre au nom du formulaire dans index.html
+        ...formData 
+      })
+    })
+      .then(() => {
+        // Succès
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsOpen(false);
+          setIsSubmitted(false);
+          setFormData({ radioName: '', contactName: '', phoneNumber: '' });
+        }, 3000);
+      })
+      .catch(error => {
+        console.error("Erreur d'envoi", error);
+        alert("Une erreur est survenue lors de l'envoi.");
+      });
   };
 
   return (
@@ -70,10 +97,22 @@ const CallbackModal: React.FC = () => {
                     <Send className="w-8 h-8" />
                   </div>
                   <h4 className="text-xl font-bold text-gray-800 mb-2">Demande envoyée !</h4>
-                  <p className="text-gray-600">Un conseillé Jingletube vous rappellera très rapidement.</p>
+                  <p className="text-gray-600">Un spécialiste Jingletube vous rappellera très rapidement.</p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="space-y-4"
+                  name="callback-request"
+                  data-netlify="true"
+                >
+                  <input type="hidden" name="form-name" value="callback-request" />
+                  
+                  {/* Champ caché honeypot pour les robots */}
+                  <p className="hidden">
+                    <label>Ne pas remplir<input name="bot-field" value={botField} onChange={e => setBotField(e.target.value)} /></label>
+                  </p>
+
                   <div>
                     <label htmlFor="radioName" className="block text-sm font-medium text-gray-700 mb-1">Nom de la Radio</label>
                     <input
